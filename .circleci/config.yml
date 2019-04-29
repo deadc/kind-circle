@@ -3,7 +3,7 @@ jobs:
   build:
     machine: true
     environment:
-      KUBERNETES_MASTER=http://localhost:10080
+      KUBERNETES_MASTER=http://localhost:8443
 
     steps:
       - run:
