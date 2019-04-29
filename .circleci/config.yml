@@ -19,5 +19,5 @@ jobs:
           name: Get Pods
           command: |
             wget -O ./kubectl https://storage.googleapis.com/kubernetes-release/release/v1.10.10/bin/linux/amd64/kubectl
-            chmod +x ./kubectl && ./kubectl get pods --all-namespaces
+            chmod +x ./kubectl && ./kubectl get all
 
