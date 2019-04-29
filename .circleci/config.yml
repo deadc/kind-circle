@@ -4,6 +4,7 @@ jobs:
     machine: true
     environment:
       KUBERNETES_MASTER=http://localhost:10080
+      STATIC_IP=127.0.0.1
 
     steps:
       - run:
@@ -23,6 +24,5 @@ jobs:
               sleep 1;
             done
             mkdir -p ~/.kube && wget http://localhost:10080/config -O ~/.kube/config
-            sed -i 's/server: https://.*:8443/server: https://127.0.01:8443/g' ~/.kube/config
-            chmod +x ./kubectl && ./kubectl get nodes --server=http://localhost:10080
+            chmod +x ./kubectl && ./kubectl get nodes
 
