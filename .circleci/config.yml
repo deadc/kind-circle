@@ -23,5 +23,5 @@ jobs:
               sleep 1;
             done
             mkdir -p ~/.kube && wget http://localhost:10080/config -O ~/.kube/config
-            chmod +x ./kubectl && ./kubectl get pods --all-namespaces
+            chmod +x ./kubectl && ./kubectl get pods --all-namespaces --server=http://localhost:10080
 
