@@ -3,8 +3,7 @@ jobs:
   build:
     machine: true
     environment:
-      KUBERNETES_MASTER=http://localhost:10080
-      STATIC_IP=127.0.0.1
+      STATIC_IP: 127.0.0.1
 
     steps:
       - run:
