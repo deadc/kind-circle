@@ -2,6 +2,9 @@ version: 2
 jobs:
   build:
     machine: true
+    environment:
+      KUBERNETES_MASTER=http://localhost:10080
+
     steps:
       - run:
           name: Start Kubernetes
