@@ -17,7 +17,7 @@ download_kubectl:
 	chmod +x kubectl
 
 wait_for:
-	APISERVER := $(shell kubectl config view --minify | grep server: | grep -oE 'http.://(.*)')
+	APISERVER=$(shell ./kubectl config view --minify | grep server: | grep -oE 'http.://(.*)')
 	until curl -s --fail http://${APISERVER}/kubernetes-ready; do sleep 1 ; done
 
 validate: download_kubectl kind_create wait_for
