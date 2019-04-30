@@ -1,7 +1,7 @@
 export KIND_VERSION ?= 0.2.1
 export KUBE_VERSION ?= v1.11.3
 export KUBECONFIG := /home/circleci/.kube/kind-config-kind
-export APISERVER  := $(shell grep 'server:' ${KUBECONFIG} | grep -oE "http.://(.*)")
+export APISERVER  := $(shell grep -i 'server:' /home/circleci/.kube/kind-config-kind | grep -oE "http.://(.*)")
 
 download_kind:
 	wget https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 -O kind
