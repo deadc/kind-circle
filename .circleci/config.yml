@@ -6,6 +6,7 @@ jobs:
       STATIC_IP: 127.0.0.1
 
     steps:
+      - checkout 
       - run:
           name: Get Pods
-          command: make test
+          command: make validate

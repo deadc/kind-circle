@@ -15,7 +15,7 @@ download_kubectl:
 	wget https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl -O kubectl
 	chmod +x kubectl
 
-test: download_kubectl kind_create
+validate: download_kubectl kind_create
 	until curl -s --fail http://127.0.0.1:10080/config; do
 		sleep 1;
 	done
