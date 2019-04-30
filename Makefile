@@ -1,6 +1,7 @@
 export KIND_VERSION ?= 0.2.1
 export KUBE_VERSION ?= v1.11.3
 export KUBECONFIG := /home/circleci/.kube/kind-config-kind
+export APISERVER  := $(shell grep 'server:' ${KUBECONFIG} | grep -oE "http.://(.*)")
 
 download_kind:
 	wget https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 -O kind
@@ -17,7 +18,6 @@ download_kubectl:
 	chmod +x kubectl
 
 wait_for:
-	APISERVER=$(shell ./kubectl config view --minify | grep server: | grep -oE 'http.://(.*)')
 	until curl -s --fail http://${APISERVER}/kubernetes-ready; do sleep 1 ; done
 
 validate: download_kubectl kind_create wait_for
