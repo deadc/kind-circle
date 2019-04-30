@@ -1,5 +1,5 @@
-KIND_VERSION ?= 0.2.1
-KUBE_VERSION ?= v1.11.3
+export KIND_VERSION ?= 0.2.1
+export KUBE_VERSION ?= v1.11.3
 export KUBECONFIG := /home/circleci/.kube/kind-config-kind
 
 download_kind:
@@ -17,7 +17,8 @@ download_kubectl:
 	chmod +x kubectl
 
 wait_for:
-	until curl -s --fail http://127.0.0.1:10080/kubernetes-ready; do sleep 1 ; done
+	APISERVER := $(shell kubectl config view --minify | grep server: | grep -oE 'http.://(.*)')
+	until curl -s --fail http://${APISERVER}/kubernetes-ready; do sleep 1 ; done
 
 validate: download_kubectl kind_create wait_for
 	./kubectl get nodes
