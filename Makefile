@@ -16,7 +16,7 @@ download_kubectl:
 	chmod +x kubectl
 
 validate: download_kubectl kind_create
-	KUBECONFIG="$(./kind get kubeconfig-path --name="kind")" ./kubectl get nodes
+	./kind get kubeconfig-path --name="kind"
 
 
 .PHONY: download_kind kind_create kind_destroy download_kubectl test
