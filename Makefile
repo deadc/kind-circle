@@ -25,6 +25,7 @@ apply: download_kubectl download_kind kind_create wait_for
 	./kubectl get all --namespace test
 
 test: apply
+	until ./kubectl get pods --field-selector=status.phase=Running | grep -i httpbin ; do sleep 1 ; done
 	nohup ./kubectl port-forward --namespace test service/httpbin 8000:8000 &
 	until curl -iL http://localhost:8000/status/200 ; do cat nohup.out ; sleep 1 ; done
 
