@@ -17,7 +17,7 @@ download_kubectl:
 	chmod +x kubectl
 
 wait_for:
-	until ./kubectl get pods | grep -i kube-apiserver-kind-control-plane ; do sleep 1 ; done
+	until ./kubectl get pods --namespace kube-system | grep -i kube-apiserver-kind-control-plane ; do sleep 1 ; done
 
 validate: download_kubectl kind_create wait_for
 	./kubectl get pods --all-namespaces
