@@ -26,7 +26,7 @@ apply: download_kubectl download_kind kind_create wait_for
 
 test: apply
 	nohup ./kubectl port-forward --namespace test service/httpbin 8000:8000 &
-	curl -iL http://localhost:8000/status/200
+	until curl -iL http://localhost:8000/status/200 ; do cat nohup.out ; sleep 1 ; done
 
 .PHONY: download_kind kind_create kind_destroy download_kubectl wait_for apply test
 
