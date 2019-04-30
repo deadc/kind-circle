@@ -17,7 +17,8 @@ download_kubectl:
 	chmod +x kubectl
 
 validate: download_kubectl kind_create
-	./kubectl get nodes --server=http://localhost:10080
+	cat ${KUBECONFIG}
+	KUBECONFIG=/home/circleci/.kube/kind-config-kind ./kubectl get nodes
 
 
 .PHONY: download_kind kind_create kind_destroy download_kubectl test
