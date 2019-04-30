@@ -1,5 +1,5 @@
 KIND_VERSION ?= 0.2.1
-KUBE_VERSION ?= 1.11.3
+KUBE_VERSION ?= v1.11.3
 
 download_kind:
 	wget https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 -O kind
@@ -12,7 +12,7 @@ kind_destroy:
 	./kind delete cluster
 
 download_kubectl:
-	wget https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl -O kubectl
+	wget https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl -O kubectl
 	chmod +x kubectl
 
 validate: download_kubectl kind_create
