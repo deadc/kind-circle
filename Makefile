@@ -17,7 +17,7 @@ download_kubectl:
 	chmod +x kubectl
 
 wait_for:
-  export APISERVER := $(shell grep -i 'server:' /home/circleci/.kube/kind-config-kind | grep -oE "http.://(.*)")
+  APISERVER=$(shell grep -i 'server:' /home/circleci/.kube/kind-config-kind | grep -oE "http.://(.*)")
 	echo ${APISERVER}
 	#until curl -s --fail http://${APISERVER}/kubernetes-ready; do sleep 1 ; done
 
