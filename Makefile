@@ -16,9 +16,12 @@ download_kubectl:
 	wget https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl -O kubectl
 	chmod +x kubectl
 
-validate: download_kubectl kind_create
-	./kubectl get nodes
+wait_for:
+	until curl -s --fail http://127.0.0.1:10080/kubernetes-ready; do sleep 1 ; done
 
+validate: download_kubectl kind_create wait_for
+	./kubectl get nodes
+	./kubectl get pods --all-namespaces
 
 .PHONY: download_kind kind_create kind_destroy download_kubectl test
 
