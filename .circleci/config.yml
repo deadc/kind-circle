@@ -7,21 +7,5 @@ jobs:
 
     steps:
       - run:
-          name: Start Kubernetes
-          command: |
-            docker run -d --name kube --privileged -p 8443:8443 -p 10080:10080 bsycorp/kind:latest-1.9
-            until curl -s --fail http://127.0.0.1:10080/kubernetes-ready; do
-              sleep 1;
-            done
-            echo "Kubernetes ready - run tests!"
-
-      - run:
           name: Get Pods
-          command: |
-            wget -O ./kubectl https://storage.googleapis.com/kubernetes-release/release/v1.10.10/bin/linux/amd64/kubectl
-            until curl -s --fail http://127.0.0.1:10080/config; do
-              sleep 1;
-            done
-            mkdir -p ~/.kube && wget http://localhost:10080/config -O ~/.kube/config
-            chmod +x ./kubectl && ./kubectl get nodes
-
+          command: make test
