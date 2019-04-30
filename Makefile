@@ -23,5 +23,5 @@ test: download_kubectl kind_create
 	./kubectl get nodes
 
 
-.PHONY: download_kind kind_create kind_destroy download_kubectl
+.PHONY: download_kind kind_create kind_destroy download_kubectl test
 
