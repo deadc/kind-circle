@@ -1,7 +1,7 @@
 #!/bin/bash
 
 attempt_counter=0
-max_attempts=2
+max_attempts=6
 check=0
 
 while [ ${check} -lt 3 ] ; do
