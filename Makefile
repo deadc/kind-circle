@@ -17,7 +17,7 @@ download_kubectl:
 	chmod +x kubectl
 
 wait_for:
-	until curl -s --fail "$(shell grep -i 'server:' ${KUBECONFIG} | grep -oE "http.://(.*)")/kubernetes-ready" ; do sleep 1 ; done
+	until curl -s --fail "$(shell grep -i 'server:' ${KUBECONFIG} | grep -oE "http.://(.*)")/kubernetes-ready" ; do ./kubectl get nodes && ./kubectl get pods --all-namespaces ; sleep 1 ; done
 
 validate: download_kubectl kind_create wait_for
 	./kubectl get nodes
