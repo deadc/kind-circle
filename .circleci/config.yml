@@ -2,8 +2,6 @@ version: 2
 jobs:
   build:
     machine: true
-    environment:
-      STATIC_IP: 127.0.0.1
 
     steps:
       - checkout 
