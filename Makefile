@@ -19,10 +19,13 @@ download_kubectl:
 wait_for:
 	until ./kubectl get pods --namespace kube-system kube-apiserver-kind-control-plane > /dev/null 2>&1 ; do sleep 1 ; done
 
-validate: download_kubectl download_kind kind_create wait_for
+apply: download_kubectl download_kind kind_create wait_for
 	./kubectl create namespace test
 	./kubectl apply --namespace test -R -f deploy
 	./kubectl get all --namespace test
 
-.PHONY: download_kind kind_create kind_destroy download_kubectl wait_for validate
+test: apply
+	./kubectl get ingress --namespace test
+
+.PHONY: download_kind kind_create kind_destroy download_kubectl wait_for apply test
 

@@ -8,5 +8,5 @@ jobs:
     steps:
       - checkout 
       - run:
-          name: Get Pods
-          command: make validate
+          name: Run tests
+          command: make test
