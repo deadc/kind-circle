@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: private
+  name: httpbin
+spec:
+  rules:
+  - host: httpbin.sample
+    http:
+      paths:
+      - backend:
+          serviceName: httpbin
+          servicePort: 80
+        path: /
+

@@ -17,10 +17,11 @@ download_kubectl:
 	chmod +x kubectl
 
 wait_for:
-	until ./kubectl get pods --namespace kube-system | grep -i kube-apiserver-kind-control-plane ; do sleep 1 ; done
+	until ./kubectl get pods --namespace kube-system kube-apiserver-kind-control-plane ; do sleep 1 ; done
 
 validate: download_kubectl kind_create wait_for
-	./kubectl get pods --all-namespaces
+	./kubectl create namespace test
+	./kubectl apply -R -f deploy
 
 .PHONY: download_kind kind_create kind_destroy download_kubectl test
 
