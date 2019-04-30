@@ -12,6 +12,6 @@ while [ ${check} -lt 3 ] ; do
 
     printf '.'
     attempt_counter=$(($attempt_counter+1))
-    check=$( kubectl get pods --namespace platform --field-selector=status.phase=Running 2> /dev/null | grep -i httpbin | wc -l )
+    check=$( ./kubectl get pods --namespace platform --field-selector=status.phase=Running 2> /dev/null | grep -i httpbin | wc -l )
     sleep 5
 done
