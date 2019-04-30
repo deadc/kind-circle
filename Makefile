@@ -17,7 +17,7 @@ download_kubectl:
 	chmod +x kubectl
 
 validate: download_kubectl kind_create
-	./kubectl get nodes
+	./kubectl get nodes --server=http://localhost:10080
 
 
 .PHONY: download_kind kind_create kind_destroy download_kubectl test
